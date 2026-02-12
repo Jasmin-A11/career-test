@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试结果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 35px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .result-section {
+            margin-bottom: 40px;
+        }
+
+        .dominant-type {
+            margin-bottom: 35px;
+        }
+
+        .dominant-type h2 {
+            color: #3498db;
+            margin-bottom: 25px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .type-image {
+            max-width: 320px;
+            height: 300px;
+            margin: 25px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .type-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .type-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .gender-selector {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .gender-selector p {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .gender-btn {
+            padding: 10px 25px;
+            margin: 0 12px;
+            background-color: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .gender-btn:hover {
+            background-color: #e0e0e0;
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .gender-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .copy-text {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            line-height: 1.8;
+            text-align: left;
+            font-size: 16px;
+            color: #555;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn {
+            display: block;
+            width: 220px;
+            margin: 40px auto;
+            padding: 14px;
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(149, 165, 166, 0.3);
+        }
+
+        .back-btn:hover {
+            background-color: #7f8c8d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(149, 165, 166, 0.4);
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .dominant-type h2 {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .gender-selector {
+            animation: fadeInUp 0.7s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .type-image {
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .copy-text {
+            animation: fadeInUp 0.9s ease-out;
+            animation-delay: 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .back-btn {
+            animation: fadeInUp 1.0s ease-out;
+            animation-delay: 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .gender-btn:hover {
+            animation: pulse 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 15px;
+                padding: 20px;
+            }
+
+            .type-image {
+                max-width: 250px;
+            }
+
+            .gender-btn {
+                padding: 8px 20px;
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .copy-text {
+                padding: 20px;
+                font-size: 15px;
+            }
+
+            .back-btn {
+                width: 200px;
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>您的职业适配域是</h1>
+        
+        <div class="result-section">
+            <div class="dominant-type" style="text-align: center;">
+                <h2 id="dominant-title" style="text-align: center;">主导职业类型</h2>
+                <div class="type-image" id="type-image">
+                    <!-- 图像将通过JavaScript动态加载 -->
+                </div>
+                <div class="copy-text" id="copy-text">
+                    <!-- 结算文案将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-btn">重新测试</a>
+    </div>
+    
+    <script>
+        // 从URL获取测试结果数据
+        function getUrlParams() {
+            const params = {};
+            const urlParams = new URLSearchParams(window.location.search);
+            for (const [key, value] of urlParams.entries()) {
+                params[key] = value;
+            }
+            return params;
+        }
+        
+        // 类型名称映射
+        const typeNames = {
+            R: '实操技术型',
+            I: '研究探索型',
+            A: '艺术创意型',
+            S: '社会服务型',
+            E: '企业经营型',
+            C: '行政事务型'
+        };
+        
+        // 结算文案
+        const copyTexts = {
+            R: `您的测试结果为实操技术型。
+这一职业类型以落地执行和技术应用为核心，直接对接实际场景。在工作中更喜欢与具体的实物、工具、机械或动植物打交道，而非处理抽象的概念或频繁的社交。您通常是务实的行动派，在需要动手操作、现场调试或产出具体成果的环境中能发挥出最大的效能。
+在详细特质方面，您展现出极强的实操能力，倾向于通过直观的操作来解决现实问题。由于追求结果的确定性与客观性，对事物的运作原理有着天然的探究欲望，能够耐心地钻研技术细节。在保障生产效率、维护技术指标稳定达成以及处理专业性操作的复杂问题方面，具有不可替代的专业价值。`,
+            I: `您的测试结果为研究探索型。
+这一职业类型以理论深挖和创新突破为核心，通常拥有极强的好奇心和求知欲。在职业表现上，乐于在逻辑推演、数学计算或实验数据中寻找事物的真相。您更倾向于独立思考，在需要进行深度分析和智力挑战的环境中感到充实，能够为学科或技术的发展提供坚实的理论支撑。
+在详细特质方面，您具备高度的洞察力和严密的逻辑思维，擅长处理和深挖复杂且抽象的问题。不满足于表象的解释，而是追求深层次的原理分析。在科学研究、技术研发或复杂的系统方案设计中，能够凭借冷静的分析和创新的视角打破固有认知，为团队或组织带来具有前瞻性的智慧成果。`,
+            A: `您的测试结果为艺术创意型。
+这一职业类型以创意构思、美学表达与作品创作为核心，聚焦于创意的落地。通常具有敏锐的感受力和丰富的想象力，极度重视自我表达的独特性与作品的美感。您致力于通过个人的感知为世界创造美，在非结构化、鼓励创新的环境里最能激发出创作灵感。
+在详细特质方面，您表现出极高的审美直觉和感性特质，不喜欢拘泥于陈规旧矩或死板的行政束缚。擅长捕捉生活中的细微波动，并将其转化为视觉、听觉或文字上的艺术表达。在需要直觉判断、情感共鸣和审美决策的领域中，总能提供耳目一新的视角和直击人心的创意方案。`,
+            S: `您的测试结果为社会服务型。
+这一职业类型以对接社会需求、提供公共民生服务为核心。您通常具有极强的同理心和责任感，乐于为不同的社会群体提供专业化的服务和情感支持。在人际互动中会感到能量充沛，擅长通过教育、咨询或医疗等方式赋能他人，是社会秩序中温暖的维护者与修复者。
+在详细特质方面，您展现出卓越的倾听、沟通与表达能力，能够敏锐地感知他人的情绪状态并给予适时的支持。您倾向于在合作与互助的氛围中工作，通过建立深厚的信任关系来实现自我价值。在需要高度人道主义精神和复杂人际协调的场景中，能够凭借出色的社交技能构建和谐的群体环境。`,
+            E: `您的测试结果为企业经营型。
+这一职业类型以企业运营、商业决策与价值创造为核心，聚焦企业的战略规划和盈利增长。通常具备卓越的领导潜质和敏锐的商业嗅觉，是果断的决策者和资源的统筹者。您充满了活力和说服力，致力于推动组织的持续扩张并实现明确的经济或社会目标。
+在详细特质方面，您展现出极强的目标感和领导力，敢于承担风险并在竞争环境下获取关键资源。擅长在商业洽谈、团队管理和市场开拓中发挥影响力，能够通过精准的市场研判和高效的资源配置引领团队走向成功。其核心价值在于能够将愿景转化为具体的业务增长，并不断提升组织的竞争力。`,
+            C: `您的测试结果为行政事务型。
+这一职业类型以流程规范、事务统筹与组织保障为核心。强调细致严谨、执行力和规则意识，是保障组织高效有序运转的中流砥柱。您在结构化明确、有章可循的环境中游刃有余，致力于确保每一项指令、每一笔数据都能精准无误地落地。
+在详细特质方面，您对细节有着天然的敏感度，极度重视工作的准确性、合规性与时效性。擅长制定并遵循严密的计划，能够有条不紊地处理繁琐的行政流程或财务数据。在需要高度自律、风险防范和稳定性保障的岗位上，能够通过规范化的管理消除运行中的安全隐患，提供最可靠的后台支撑。`
+        };
+        
+        // 图像路径映射
+        const imagePaths = {
+            R: {
+                male: '前导2图像/实操技术型/实操（男）.png',
+                female: '前导2图像/实操技术型/实操（女）.png'
+            },
+            I: {
+                male: '前导2图像/研究探索型/研究（男）.png',
+                female: '前导2图像/研究探索型/研究（女）.png'
+            },
+            A: {
+                male: '前导2图像/艺术创意型/艺术（男）.png',
+                female: '前导2图像/艺术创意型/艺术（女）.png'
+            },
+            S: {
+                male: '前导2图像/社会服务型/社会（男）.png',
+                female: '前导2图像/社会服务型/社会（女）.png'
+            },
+            E: {
+                male: '前导2图像/企业经营型/企业（男）.jpg',
+                female: '前导2图像/企业经营型/企业（女）.jpg'
+            },
+            C: {
+                male: '前导2图像/行政事务型/行政（男）.png',
+                female: '前导2图像/行政事务型/行政（女）.png'
+            }
+        };
+        
+        // 全局变量
+        let currentDominantType = '';
+        let currentGender = 'male';
+        
+        // 加载测试结果
+        function loadResult() {
+            const params = getUrlParams();
+            
+            // 解析得分数据
+            let scores = {};
+            try {
+                scores = JSON.parse(params.scores);
+            } catch (e) {
+                console.error('无法解析得分数据:', e);
+                return;
+            }
+            
+            // 解析主导类型
+            currentDominantType = params.dominantType || '';
+            
+            // 显示主导类型
+            if (currentDominantType && typeNames[currentDominantType]) {
+                document.getElementById('dominant-title').textContent = typeNames[currentDominantType];
+                
+                // 加载性别选择器
+                const genderSelector = document.createElement('div');
+                genderSelector.className = 'gender-selector';
+                genderSelector.innerHTML = `
+                    <p>选择性别：</p>
+                    <button class="gender-btn ${currentGender === 'male' ? 'active' : ''}" data-gender="male">男</button>
+                    <button class="gender-btn ${currentGender === 'female' ? 'active' : ''}" data-gender="female">女</button>
+                `;
+                
+                // 插入性别选择器
+                const dominantTypeDiv = document.querySelector('.dominant-type');
+                const imageContainer = document.getElementById('type-image');
+                dominantTypeDiv.insertBefore(genderSelector, imageContainer);
+                
+                // 绑定性别选择事件
+                document.querySelectorAll('.gender-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        currentGender = this.dataset.gender;
+                        
+                        // 更新按钮状态
+                        document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 重新加载图像
+                        loadGenderedImage();
+                    });
+                });
+                
+                // 加载类型图像
+                loadGenderedImage();
+                
+                // 加载结算文案
+                const copyContainer = document.getElementById('copy-text');
+                if (copyTexts[currentDominantType]) {
+                    // 将换行符转换为HTML换行
+                    const formattedText = copyTexts[currentDominantType].replace(/\n/g, '<br>');
+                    copyContainer.innerHTML = formattedText;
+                }
+            }
+        }
+        
+        // 加载性别对应的图像
+        function loadGenderedImage() {
+            if (currentDominantType && imagePaths[currentDominantType] && imagePaths[currentDominantType][currentGender]) {
+                const imageContainer = document.getElementById('type-image');
+                const img = document.createElement('img');
+                img.src = imagePaths[currentDominantType][currentGender];
+                img.alt = typeNames[currentDominantType];
+                imageContainer.innerHTML = '';
+                imageContainer.appendChild(img);
+            }
+        }
+        
+        // 页面加载时执行
+        window.onload = loadResult;
+    </script>
+</body>
+</html>
