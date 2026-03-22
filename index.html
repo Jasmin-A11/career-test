@@ -164,14 +164,24 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 20px;
+            gap: 15px;
         }
 
         .options-label {
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-light);
             min-width: 60px;
             text-align: center;
+        }
+
+        .options-label:first-child {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .options-label:last-child {
+            color: #27ae60;
+            font-weight: 600;
         }
 
         .options {
@@ -207,8 +217,8 @@
         .option:nth-child(2) {
             width: 40px;
             height: 40px;
-            border-color: #e74c3c;
-            background-color: rgba(231, 76, 60, 0.1);
+            border-color: var(--primary-light);
+            background-color: rgba(159, 103, 255, 0.1);
         }
 
         .option:nth-child(3) {
@@ -255,7 +265,7 @@
         }
 
         .option:nth-child(2).selected {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
         }
 
         .option:nth-child(3).selected {
@@ -263,7 +273,7 @@
         }
 
         .option:nth-child(4).selected {
-            background: linear-gradient(135deg, #2ecc71, #3498db);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
         }
 
         .option:nth-child(5).selected {
@@ -543,13 +553,15 @@
             }
 
             .options-container {
-                flex-direction: column;
-                align-items: stretch;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
             }
 
             .options-label {
                 text-align: center;
-                margin-bottom: 8px;
+                min-width: 45px;
+                font-size: 12px;
             }
 
             .options {
